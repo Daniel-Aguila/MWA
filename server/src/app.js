@@ -2,19 +2,16 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const morgan = require("morgan")
-const { Client } = require('pg')
-const client = new Client()
-/*
-await client.connect()
- 
-const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-console.log(res.rows[0].message) // Hello world!
-await client.end()
-*/
 
-/*
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'mwaAPI',
+  password: 'password',
+  port: 5432,
+})
 
-*/
 
 const app = express() //builds an express server
 app.use(morgan("combined"))
