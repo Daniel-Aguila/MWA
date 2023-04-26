@@ -38,7 +38,7 @@ const createUser =(req,res)=>{
     })
 }
 
-const addSongByUserid = (req,res)=>{
+const addSongbyUserid = (req,res)=>{
     const{username,song,rating,songname}=req.body;
     const userid = "";
     pool.query('SELECT userid FROM users WHERE username=$1',[username],(err,results)=>{
@@ -60,4 +60,12 @@ const deleteUser =(req,res)=>{
         if(err)throw err;
         res.status(200).send(`User deleted with userid = ${userid}`)
     })
+}
+
+module.exports={
+    getUsers,
+    getSongsbyUser,
+    createUser,
+    addSongbyUserid,
+    deleteUser
 }
