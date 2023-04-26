@@ -32,8 +32,23 @@ const getSongsbyUser = (req,res)=>{
 //POST
 const createUser =(req,res)=>{
     const{username,password,sex,age} = req.body;
-    pool.query('INSERT INTO users VALUES ($1,$2,$3,$4)', [username,password,sex,age], (err,results)=>{
+    pool.query('INSERT INTO users (username,password,sex,age) VALUES ($1,$2,$3,$4)', [username,password,sex,age], (err,results)=>{
         if(err) throw err;
         res.status(201).send('User added');
+    })
+}
+
+const addSongByUserid = (req,res)=>{
+    const{username,song,rating,songname}=req.body;
+    const userid = "";
+    pool.query('SELECT userid FROM users WHERE username=$1',[username],(err,results)=>{
+        if(err)throw err;
+        res.status(201).send('Got userid');
+        userid = results.rows[0];
+    })
+    //after getting userid, now we can add songs to a specific user
+    pool.query('INERT INTO usersongs VALUES ($1,$2,$3,$4)',[userid,song,rating,songname],(err,results)=>{
+        if(err)throw err;
+        res.status(201).send('Song added to specific user');
     })
 }
