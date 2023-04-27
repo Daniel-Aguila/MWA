@@ -1,10 +1,11 @@
+const config = require("./config/config.js")
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'mwaAPI',
-  password: 'password',
-  port: 5432,
+  user: config.db_user,
+  host: config.db_host,
+  database: config.db_database,
+  password: config.db_password,
+  port: config.db_port,
 })
 
 pool.connect(function(err){

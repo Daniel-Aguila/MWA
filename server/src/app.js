@@ -2,30 +2,13 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const morgan = require("morgan")
-const db = require("./db")
+const config = require("./config/config.js")
 
 const app = express() //builds an express server
 app.use(morgan("combined"))
 app.use(bodyParser.json())
 app.use(cors())
 
-//define route
-app.get('/status', (req, res) => {
-    res.send({
-        message: `hello world!`
-    })
-})
+routes = require("./routes.js")(app) //we send the app
 
-app.post('/register', (req,res)=>{
-    res.send({
-        message: `Hello ${req.body.email}! Your user was registered! Have fun!`
-    })
-})
-
-app.get('/getUsers', db.getUsers)
-app.get('/getSongbyUser', db.getSongsbyUser)
-app.post('/createUser', db.createUser)
-app.post('/addSongbyUserid', db.addSongbyUserid)
-app.delete('/deleteUser', db.deleteUser)
-
-app.listen(process.env.PORT || 8081)
+app.listen(config.back_port)
