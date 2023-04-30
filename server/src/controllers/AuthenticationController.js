@@ -1,7 +1,14 @@
+const userModel = require('server/src/models/user.model.js')
+
 module.exports = {
-    register(req,res){
-        res.send({
-            message: `Hello ${req.body.email}! Your user was registered! Have fun!`
-        })
+    async register(req,res){
+        try{
+            const user = await userModel.createUser(req.body)
+            res.send(user.toJSON())
+        }catch(err){
+            res.status(400).send({
+                error: 'PLACEHOLDER'
+            })
+        }
     }
 }
