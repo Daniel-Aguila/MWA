@@ -1,4 +1,16 @@
-const config = require('server/src/config/config.js')
+module.exports = (sequelize, DataTypes) => {
+    sequelize.define ('User', {
+        username:{
+            type: DataTypes.STRING,
+            unique: true
+        },
+        password: DataTypes.STRING,
+        sex: DataTypes.STRING,
+        age: DataTypes.INTEGER
+    })
+}
+
+/*const config = require('server/src/config/config.js')
 
 const pool = config.pool;
 
@@ -27,8 +39,4 @@ const deleteUser =(req,res)=>{
     })
 }
 
-module.exports={
-    getUsers,
-    createUser,
-    deleteUser
-}
+*/

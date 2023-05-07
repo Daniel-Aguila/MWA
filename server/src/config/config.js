@@ -1,19 +1,21 @@
-const config = require("./config/config.js")
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'mwaAPI',
-  password: 'password',
-  port: 5432,
-})
+/*const Pool = require('pg').Pool
+
+const pool = new Pool
 
 pool.connect(function(err){
     if(err) throw err;
     console.log("Database Connected")
 });
+*/
 
 module.exports={
     back_port:8081,
-    pool
+    pool:{
+        user: 'postgres',
+        database: 'mwaAPI',
+        password: 'password',
+        port: 5432,
+        host: 'localhost',
+        dialect: 'postgres',
+        }
 }
